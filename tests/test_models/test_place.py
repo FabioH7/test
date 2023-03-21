@@ -1,39 +1,69 @@
 #!/usr/bin/python3
-"""Test Modules"""
-import io
-import sys
-import unittest
-import os
-import datetime
+""" """
+from tests.test_models.test_base_model import test_basemodel
 from models.place import Place
-from models import storage
 
 
-class TestUser(unittest.TestCase):
+class test_Place(test_basemodel):
+    """ """
 
-    def test_attributes(self):
-        base1 = Place()
-        base2 = Place()
-        self.assertNotEqual(base1.id, base2.id)
-        self.assertNotEqual(base1.created_at, base2.created_at)
-        self.assertNotEqual(base1.updated_at, base2.updated_at)
+    def __init__(self, *args, **kwargs):
+        """ """
+        super().__init__(*args, **kwargs)
+        self.name = "Place"
+        self.value = Place
 
-    def test_attribute_type(self):
-        base1 = Place()
-        self.assertEqual(type(base1.id), str)
-        self.assertEqual(type(base1.created_at), datetime.datetime)
-        self.assertEqual(type(base1.updated_at), datetime.datetime)
+    def test_city_id(self):
+        """ """
+        new = self.value()
+        self.assertEqual(type(new.city_id), str)
 
-    def test_all_attributes(self):
-        base = Place()
-        self.assertEqual(base.city_id, '')
-        self.assertEqual(base.user_id, '')
-        self.assertEqual(base.name, '')
-        self.assertEqual(base.description, '')
-        self.assertEqual(base.number_rooms, 0)
-        self.assertEqual(base.number_bathrooms, 0)
-        self.assertEqual(base.max_guest, 0)
-        self.assertEqual(base.price_by_night, 0)
-        self.assertEqual(base.latitude, 0.0)
-        self.assertEqual(base.longitude, 0.0)
-        self.assertEqual(base.amenity_ids, [])
+    def test_user_id(self):
+        """ """
+        new = self.value()
+        self.assertEqual(type(new.user_id), str)
+
+    def test_name(self):
+        """ """
+        new = self.value()
+        self.assertEqual(type(new.name), str)
+
+    def test_description(self):
+        """ """
+        new = self.value()
+        self.assertEqual(type(new.description), str)
+
+    def test_number_rooms(self):
+        """ """
+        new = self.value()
+        self.assertEqual(type(new.number_rooms), int)
+
+    def test_number_bathrooms(self):
+        """ """
+        new = self.value()
+        self.assertEqual(type(new.number_bathrooms), int)
+
+    def test_max_guest(self):
+        """ """
+        new = self.value()
+        self.assertEqual(type(new.max_guest), int)
+
+    def test_price_by_night(self):
+        """ """
+        new = self.value()
+        self.assertEqual(type(new.price_by_night), int)
+
+    def test_latitude(self):
+        """ """
+        new = self.value()
+        self.assertEqual(type(new.latitude), float)
+
+    def test_longitude(self):
+        """ """
+        new = self.value()
+        self.assertEqual(type(new.latitude), float)
+
+    def test_amenity_ids(self):
+        """ """
+        new = self.value()
+        self.assertEqual(type(new.amenity_ids), list)

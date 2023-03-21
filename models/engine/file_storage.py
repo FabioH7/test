@@ -1,43 +1,46 @@
 #!/usr/bin/python3
-'''Engine Module'''
+"""This module defines a class to manage file storage for hbnb clone"""
 import json
 import os
 from models.base_model import BaseModel
 from models.user import User
+from models.place import Place
 from models.state import State
 from models.city import City
 from models.amenity import Amenity
-from models.place import Place
 from models.review import Review
 
 
 class FileStorage:
-    '''Class used to manipulate json obj'''
-    __file_path = "file.json"
+    """This class manages storage of hbnb models in JSON format"""
+    __file_path = 'file.json'
     __objects = {}
 
-    # Returns all objects stored in FileStorage
-    def all(self):
+    def all(self, cls=None):
+        """Returns a dictionary of models currently in storage"""
+        if cls != None:
+            obj_dict = {}
+            for key, value in FileStorage.__objects.items():
+                if cls == value.__class__:
+                    obj_dict[key] = value
+            return obj_dict
         return FileStorage.__objects
 
-    # Saves a new obj in FileStorage
     def new(self, obj):
-        key = f"{obj.__class__.__name__}.{obj.id}"
-        FileStorage.__objects[key] = obj
-        return True
+        """Adds new object to storage dictionary"""
+        self.all().update({obj.to_dict()['__class__'] + '.' + obj.id: obj})
 
-    # Saves the object at Json file
     def save(self):
+        """Saves storage dictionary to file"""
         with open(FileStorage.__file_path, 'w') as f:
-            new_dict = {}
-            x = self.all()
-            for element in x:
-                new_dict[element] = x[element].to_dict()
-            f.write(json.dumps(new_dict))
-        return True
+            temp = {}
+            temp.update(FileStorage.__objects)
+            for key, val in temp.items():
+                temp[key] = val.to_dict()
+            json.dump(temp, f)
 
-    # Loads from Json and creates objects
     def reload(self):
+        """Loads storage dictionary from file"""
         if os.path.exists(FileStorage.__file_path):
             with open(FileStorage.__file_path, 'r') as f:
                 content = f.read()
@@ -48,5 +51,11 @@ class FileStorage:
                         FileStorage.new(self, value)
         return True
 
-    def file_path():
-        return FileStorage.__file_path
+    def delete(self, obj=None):
+        """Method deletes given argument obj"""
+        if obj != None:
+            storage = self.all()
+            for key, value in storage.items():
+                if value == obj:
+                    del storage[key]
+                    break

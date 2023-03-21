@@ -1,32 +1,29 @@
 #!/usr/bin/python3
-"""Test Modules"""
-import io
-import sys
-import unittest
-import os
-import datetime
+""" """
+from tests.test_models.test_base_model import test_basemodel
 from models.review import Review
-from models import storage
 
 
-class TestUser(unittest.TestCase):
+class test_review(test_basemodel):
+    """ """
 
-    def test_attributes(self):
-        base1 = Review()
-        base2 = Review()
-        self.assertNotEqual(base1.id, base2.id)
-        self.assertNotEqual(base1.created_at, base2.created_at)
-        self.assertNotEqual(base1.updated_at, base2.updated_at)
+    def __init__(self, *args, **kwargs):
+        """ """
+        super().__init__(*args, **kwargs)
+        self.name = "Review"
+        self.value = Review
 
-    def test_attribute_type(self):
-        base1 = Review()
-        self.assertEqual(type(base1.id), str)
-        self.assertEqual(type(base1.created_at), datetime.datetime)
-        self.assertEqual(type(base1.updated_at), datetime.datetime)
+    def test_place_id(self):
+        """ """
+        new = self.value()
+        self.assertEqual(type(new.place_id), str)
 
-    def test_all_attributes(self):
-        base = Review()
-        self.assertEqual(base.place_id, '')
-        self.assertEqual(base.user_id, '')
-        self.assertEqual(base.text, '')
+    def test_user_id(self):
+        """ """
+        new = self.value()
+        self.assertEqual(type(new.user_id), str)
 
+    def test_text(self):
+        """ """
+        new = self.value()
+        self.assertEqual(type(new.text), str)
