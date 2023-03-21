@@ -40,14 +40,12 @@ class DBStorage:
 
         name = DBStorage.tables[cls]
         for obj in self.__session.query(name).all():
-            # print(obj)
             index = obj.__class__.__name__ + '.' + obj.id
             new_dict[index] = obj
         print('end')
         return new_dict
 
     def new(self, obj):
-        # table_name = DBStorage.tables[obj.__class__.__name__]
         new_row = DBStorage.tables[obj.__class__.__name__](**obj.to_dict())
         self.__session.add(new_row)
         self.save()
@@ -56,8 +54,8 @@ class DBStorage:
         self.__session.commit()
 
     def delete(self, obj=None):
-        print('here')
         if obj is not None:
+            print('here')
             obj.delete()
 
     def reload(self):
