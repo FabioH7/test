@@ -55,7 +55,7 @@ class DBStorage:
 
     def delete(self, obj=None):
         if obj is not None:
-            print('here')
+            print(obj)
             obj.delete()
 
     def reload(self):
