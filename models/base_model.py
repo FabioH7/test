@@ -22,9 +22,9 @@ class BaseModel:
         self.updated_at = datetime.now()
         if kwargs:
             for key, value in kwargs.items():
-                # if key == "created_at" or key == "updated_at":
-                #     value = datetime.strptime(
-                #         value, '%Y-%m-%dT%H:%M:%S.%f')
+                if key == "created_at" or key == "updated_at":
+                    value = datetime.strptime(
+                        value, '%Y-%m-%dT%H:%M:%S.%f')
                 if key != '__class__':
                     setattr(self, key, value)
 
@@ -47,8 +47,8 @@ class BaseModel:
         dictionary.update(self.__dict__)
         dictionary.update({'__class__':
                           (str(type(self)).split('.')[-1]).split('\'')[0]})
-        # dictionary['created_at'] = self.created_at.isoformat()
-        # dictionary['updated_at'] = self.updated_at.isoformat()
+        dictionary['created_at'] = self.created_at.isoformat()
+        dictionary['updated_at'] = self.updated_at.isoformat()
         return dictionary
 
     def delete(self):
