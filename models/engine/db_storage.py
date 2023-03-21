@@ -56,8 +56,13 @@ class DBStorage:
         self.save()
 
     def save(self):
-
         self.__session.commit()
+
+    def delete(self, obj=None):
+        if obj is not None:
+            row = DBStorage.tables[obj.__class__.__name__](**obj.to_dict())
+            self.__session.delete(row)
+            self.save()
 
     def reload(self):
         Session = sessionmaker(bind=self.__engine, expire_on_commit=False)
