@@ -57,8 +57,9 @@ class DBStorage:
         if obj is not None:
             name = DBStorage.tables[obj.__class__.__name__]
             print(obj)
-            self.__session.query(name).filter(id == obj.id).delete()
-            print('po ktu')
+            x = self.__session.query(name).filter(id == obj.id).first()
+            self.__session.delete(x)
+            self.save()
 
     def reload(self):
         Session = sessionmaker(bind=self.__engine, expire_on_commit=False)
