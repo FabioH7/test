@@ -39,8 +39,7 @@ class DBStorage:
         new_dict = {}
         print(cls)
         # name = DBStorage.tables[cls]/
-        all_obj = self.__session.query(cls).all()
-        for obj in all_obj:
+        for obj in self.__session.query(cls).all():
             print(obj)
             index = obj.__class__.__name__ + '.' + obj.id
             new_dict[index] = obj
