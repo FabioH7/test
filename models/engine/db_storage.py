@@ -44,6 +44,7 @@ class DBStorage:
         for obj in all_obj:
             index = obj.to_dict()['__class__'] + '.' + obj.id
             new_dict[index] = obj
+        print(new_dict)
         return new_dict
 
     def new(self, obj):
@@ -59,7 +60,6 @@ class DBStorage:
         if obj is not None:
             row = DBStorage.tables[obj.__class__.__name__](**obj.to_dict())
             self.__session.delete(row)
-            self.save()
 
     def reload(self):
         Session = sessionmaker(bind=self.__engine, expire_on_commit=False)
