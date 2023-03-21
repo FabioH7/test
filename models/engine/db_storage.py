@@ -42,6 +42,7 @@ class DBStorage:
         for obj in self.__session.query(cls):
             index = obj.__class__.__name__ + '.' + obj.id
             new_dict[index] = obj
+        print('end')
         return new_dict
 
     def new(self, obj):
