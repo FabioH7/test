@@ -57,6 +57,7 @@ class DBStorage:
         if obj is not None:
             print(obj)
             obj.delete()
+            print('po ktu')
 
     def reload(self):
         Session = sessionmaker(bind=self.__engine, expire_on_commit=False)
