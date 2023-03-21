@@ -198,7 +198,7 @@ class HBNBCommand(cmd.Cmd):
             return
 
         key = c_name + "." + c_id
-        c_name = HBNBCommand.classes[c_name]
+        # c_name = HBNBCommand.classes[c_name]
 
         # print(storage.all(c_name)[key])
         try:
