@@ -57,7 +57,7 @@ class DBStorage:
         if obj is not None:
             name = DBStorage.tables[obj.__class__.__name__]
             print(obj.id)
-            x = self.__session.query(name).filter(id == obj.id).first()
+            x = self.__session.query(name).filter(name.id == obj.id).first()
             self.__session.delete(x)
             self.save()
 
