@@ -12,5 +12,5 @@ class State(BaseModel, Base):
     __tablename__ = 'states'
 
     name = Column(String(128), nullable=False)
-    cities = relationship("City", back_populates="states",
+    cities = relationship("State", back_populates="cities",
                           cascade='all, delete-orphan')
