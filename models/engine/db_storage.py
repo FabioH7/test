@@ -56,8 +56,9 @@ class DBStorage:
     def delete(self, obj=None):
         if obj is not None:
             row = self.__session.query(
-                DBStorage.tables[obj.__class__.__name__]).one()
-            self.__session.delete(row)
+                DBStorage.tables[obj.__class__.__name__]).all()[0]
+            print(row)
+            # self.__session.delete(row)
 
     def reload(self):
         Session = sessionmaker(bind=self.__engine, expire_on_commit=False)
