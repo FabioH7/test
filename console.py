@@ -200,7 +200,7 @@ class HBNBCommand(cmd.Cmd):
         key = c_name + "." + c_id
         # c_name = HBNBCommand.classes[c_name]
 
-        # print(storage.all(c_name)[key])
+        print(storage.all(c_name)[key])
         try:
             storage.delete(storage.all(c_name)[key])
             storage.save()
